@@ -1,0 +1,1 @@
+# Checkout Take-Home challenge
