@@ -5,7 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		README.md = README.md
 		.gitattributes = .gitattributes
-		LICENSE.md = LICENSE.md
+		LICENCE.md = LICENCE.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9D0805C3-5B39-4403-AE0F-B4BD8FDBD870}"
