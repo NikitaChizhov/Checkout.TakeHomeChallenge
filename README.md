@@ -2,7 +2,7 @@
 
 This is a primary documentation for the task, outlined in [this pdf](./Checkout.com%20Challenge.pdf)
 
-## Assumptions and shortcuts
+## Intro - Assumptions and shortcuts
 
 ### Git
 
@@ -74,3 +74,103 @@ Possible alternatives/improvements:
  - Notifying of status changes via callbacks to a specified url
 
 Simulator is checked with [integration tests](tests/Checkout.TakeHomeChallenge.BankSimulator.IntegrationTests)
+
+## Payment Gateway
+
+### Constraints
+
+As it is possible to spend unlimited amount of time for developing and polishing any complex 
+software product, lets establish some constraints:
+
+1. Payment Gateway will constitute a single service + database.
+<br/><br/>
+   In practice, gateway would likely consist of several services, here are some possible ones:
+
+   * API gateway(s), perhaps for multiple protocols (REST, Web Sockets, gRPC, GraphQL, ..?) 
+   * Coordinator, that governs the process by sending asynchronous messages
+   * Validation service(s)
+   * Merchants management service
+   * Anti-fraud service(s)
+   * Audit/other logging service
+   * Reporting service
+<br/><br/>
+
+2. Service will have hard-coded merchant information as opposed to extracting it from database
+or another service. Merchant info will be defined by id and contain its Bank Account details.
+When making a request to the Gateway, merchant should be identified by id instead of providing 
+bank details in the request.
+<br/><br/>
+    Real system will, of course, have ability to create/update/delete merchants dynamically.
+<br/><br/>
+
+3. There will be no authentication/authorization. In practice one could use similar auth as in 
+Bank Simulator (with API key) - perhaps via custom attribute instead of middleware. And/or 
+outsource auth to a dedicated service (for example [Apigee](https://cloud.google.com/apigee)). 
+However, I believe that it creates unnecessary complexity for the task without demonstrating 
+skills commensurable to the effort.
+<br/><br/>
+
+4. While outlining database choice reasons, I will not make a full market analysis and 
+spend no effort on proper database setup - it will be a one instance docker container with default configuration
+
+### API design
+
+API will consist of two REST endpoints - for making a payment and getting a previously made payment:
+POST /payments
+GET /payments/{id}
+
+API is designed under these 3 assumptions (all timings assume there is minimal latency between user and gateway):
+- Making a payment takes up to several seconds 
+- User wants to get immediate feedback that payment was accepted and is processing (< 50 ms)
+- User wants to know that payment was made as soon as it is made (< 50 ms after payment is made)
+
+To satisfy those, POST to /payments will return right after data in the request was validated and saved to 
+database. Successful response will have 202 Accepted status code and a json body with payment id + link to 
+GET endpoint.
+
+GET /payments/{id} will utilize long polling technique. So that usual flow for the customer will be
+POST /payments -> receive id right away, perhaps update UI -> GET /payments/{id} -> wait for response
+
+We can use long polling here, cause expected waiting times are short (<< 20 seconds). It is also 
+easier to use on the merchant side compared to providing callback urls or using bidirectional 
+connection like web sockets (although last point is arguable)
+
+### Database choice
+
+Let's list requirements first:
+1. Strongest possible guarantees on data persistence on successful write 
+(i.e. write is replicated before success reported, write is made on disc and not stored in memory) 
+2. Read-after-write consistency - if a user made a payment, GET can never return 404 regardless of how fast it is
+3. Low latency writes are more important then low latency reads
+4. Ability to handle multi region deployment
+
+Additional requirement that should be discussed with business is possible outage combinations. Depending on
+database setup, we may have the following combinations:
+ - Unable to POST, but able to GET
+ - Able to POST, but unable to GET
+
+All, one or neither could be acceptable, which will affect database configuration and/or choice.
+
+The good news is, many established databases can work under this requirements with proper configuration. 
+So outside considerations for other parts which are outside the task scope, it basically boils down to 
+developers and devops familiarity with a DB.
+
+Some candidates and their benefits (in no particular order):
+
+1. Cassandra: fast writes, almost infinite scalability, leaderless writes. 
+
+   But - harder to work with multiple transaction events
+
+2. PostgreSQL: extremely well tested, robust and known. 
+ 
+   But - horizontal scaling is harder for writes (sharding helps, but combine it with multi-region..)
+
+3. MongoDB: easier to work with multiple different events while keeping rich query language.
+
+   But - similar story to postgres for scaling
+
+4. EventStore: designed for Event Sourcing, use-case easily fits into what databases is optimized for
+
+   But - relatively less tested, more prone to bugs (including due to new developers unfamiliarity)
+
+Weighing pros and cons, I will choose to use postgres for this task. 
