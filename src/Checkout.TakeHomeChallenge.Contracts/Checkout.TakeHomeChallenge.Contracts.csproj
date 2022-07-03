@@ -5,5 +5,15 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+    
+<!--     <PropertyGroup> -->
+<!--         <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles> -->
+<!--         <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath> -->
+<!--     </PropertyGroup> -->
+    
+    <ItemGroup>
+      <PackageReference Include="Be.Vlaanderen.Basisregisters.Generators.Guid.Deterministic" Version="3.0.1" />
+      <PackageReference Include="StronglyTypedId" Version="1.0.0-beta06" PrivateAssets="all" ExcludeAssets="runtime" />
+    </ItemGroup>
 
 </Project>

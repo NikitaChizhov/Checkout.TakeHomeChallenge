@@ -18,6 +18,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3D613B3F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.TakeHomeChallenge.BankSimulator.IntegrationTests", "tests\Checkout.TakeHomeChallenge.BankSimulator.IntegrationTests\Checkout.TakeHomeChallenge.BankSimulator.IntegrationTests.csproj", "{E0D7F29A-BE87-4B0C-B332-315224601155}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.TakeHomeChallenge.PaymentGateway", "src\Checkout.TakeHomeChallenge.PaymentGateway\Checkout.TakeHomeChallenge.PaymentGateway.csproj", "{B535879F-A330-4789-B561-28B71F4CCD64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.TakeHomeChallenge.PaymentGateway.IntegrationTests", "tests\Checkout.TakeHomeChallenge.PaymentGateway.IntegrationTests\Checkout.TakeHomeChallenge.PaymentGateway.IntegrationTests.csproj", "{8A8B5D65-7CDE-45BE-946F-45B9A7291E61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.TakeHomeChallenge.PaymentGateway.LoadTests", "tests\Checkout.TakeHomeChallenge.PaymentGateway.LoadTests\Checkout.TakeHomeChallenge.PaymentGateway.LoadTests.csproj", "{826FDDB0-4161-447C-8E35-1822ED1C22D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,9 @@ Global
 		{93CC2D2F-376B-416C-99C4-326BA99E770D} = {9D0805C3-5B39-4403-AE0F-B4BD8FDBD870}
 		{CB824922-36A7-4E22-B830-722DDECC65FE} = {9D0805C3-5B39-4403-AE0F-B4BD8FDBD870}
 		{E0D7F29A-BE87-4B0C-B332-315224601155} = {3D613B3F-2995-4605-9060-4E35A3E72F84}
+		{B535879F-A330-4789-B561-28B71F4CCD64} = {9D0805C3-5B39-4403-AE0F-B4BD8FDBD870}
+		{8A8B5D65-7CDE-45BE-946F-45B9A7291E61} = {3D613B3F-2995-4605-9060-4E35A3E72F84}
+		{826FDDB0-4161-447C-8E35-1822ED1C22D2} = {3D613B3F-2995-4605-9060-4E35A3E72F84}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{93CC2D2F-376B-416C-99C4-326BA99E770D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -41,5 +50,17 @@ Global
 		{E0D7F29A-BE87-4B0C-B332-315224601155}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0D7F29A-BE87-4B0C-B332-315224601155}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0D7F29A-BE87-4B0C-B332-315224601155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B535879F-A330-4789-B561-28B71F4CCD64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B535879F-A330-4789-B561-28B71F4CCD64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B535879F-A330-4789-B561-28B71F4CCD64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B535879F-A330-4789-B561-28B71F4CCD64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A8B5D65-7CDE-45BE-946F-45B9A7291E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8B5D65-7CDE-45BE-946F-45B9A7291E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8B5D65-7CDE-45BE-946F-45B9A7291E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8B5D65-7CDE-45BE-946F-45B9A7291E61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{826FDDB0-4161-447C-8E35-1822ED1C22D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{826FDDB0-4161-447C-8E35-1822ED1C22D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{826FDDB0-4161-447C-8E35-1822ED1C22D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{826FDDB0-4161-447C-8E35-1822ED1C22D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -10,7 +10,7 @@ public sealed record TransactionResponse
     /// <summary>
     /// Transaction status.
     /// </summary>
-    public Status StatusCode { get; init; }
+    public Status Status { get; init; }
     
     /// <summary>
     /// Date and time of transaction start.

@@ -28,7 +28,7 @@ public static class TestData
                 RecipientBankAccountNumber = "BE71096123456769",
                 RecipientBankIdentifierCode = "EBATBEBB",
                 SenderName = "John Doe",
-                SenderCardNumber = "4974598071292095",
+                SenderCardNumber = "4974 5980 7129 2095",
                 SenderCardExpiryDate = "06/2024",
                 SenderCardVerificationValue = "321",
                 Amount = 1,

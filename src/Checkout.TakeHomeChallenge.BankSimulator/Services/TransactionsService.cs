@@ -56,10 +56,9 @@ internal sealed class TransactionsService : ITransactionsService
                 return transaction with
                 {
                     Updated = DateTime.UtcNow,
-                    StatusCode = Random.Shared.NextSingle() switch
+                    Status = Random.Shared.NextSingle() switch
                     {
-                        <= 0.33f => Status.Voided,
-                        <= 0.67f => Status.Rejected,
+                        <= 0.2f => Status.Rejected,
                         _ => Status.Completed
                     }
                 };
@@ -87,7 +86,7 @@ internal sealed class TransactionsService : ITransactionsService
             transaction = new TransactionResponse
             {
                 Id = id,
-                StatusCode = Status.Accepted,
+                Status = Status.Accepted,
                 Started = datetime,
                 Updated = datetime
             };

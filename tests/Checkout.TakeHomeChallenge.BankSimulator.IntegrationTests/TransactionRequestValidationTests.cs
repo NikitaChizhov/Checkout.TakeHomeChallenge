@@ -180,7 +180,7 @@ public class TransactionRequestValidationTests : IAsyncLifetime
         transactionResponse.Updated.Should()
             .BeWithin(TimeSpan.FromMilliseconds(50)).Before(DateTime.UtcNow, 
                 "expected a transaction status to be updated right before returning");
-        transactionResponse.StatusCode.Should().NotBe(Status.Accepted);
+        transactionResponse.Status.Should().NotBe(Status.Accepted);
     }
     
     private async Task AssertBadRequestAsync(TransactionRequest request)

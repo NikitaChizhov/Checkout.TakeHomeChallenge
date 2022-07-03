@@ -62,7 +62,7 @@ between ~ 1 and 4 seconds. Response will contain the transaction id and its stat
 
 API uses a form of idempotency control with optional 'Idempotency-Key' Header. 
 Making POST requests with the same value of that header will result in the same id and 
-transactions not being "repeated".
+transactions not being "repeated". I skip all the management nuance around usage of such keys (like expiry)
 
 Post request takes a flat [TransactionRequest](src/Checkout.TakeHomeChallenge.Contracts/Requests/TransactionRequest.cs) 
 json as input. It expects minimal information and validates the format using System.ComponentModel.DataAnnotations.
