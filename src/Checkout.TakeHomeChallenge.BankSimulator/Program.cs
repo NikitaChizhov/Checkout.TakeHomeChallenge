@@ -5,6 +5,10 @@ using Hellang.Middleware.ProblemDetails;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<DummyApiKeyServiceConfig>(config =>
+{
+    config.ApiKey = builder.Configuration.GetValue<string>("ApiKey");
+});
 builder.Services.AddSingleton<IApiKeyService, DummyApiKeyService>();
 builder.Services.AddSingleton<ITransactionsService, TransactionsService>();
 

@@ -7,6 +7,7 @@ using Checkout.TakeHomeChallenge.Contracts.Responses;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Options;
 
 namespace Checkout.TakeHomeChallenge.BankSimulator.IntegrationTests;
 
@@ -23,7 +24,9 @@ public class TransactionRequestValidationTests : IAsyncLifetime
             {
                 builder.ConfigureTestServices(sc =>
                 {
-                    sc.AddSingleton<IApiKeyService>(new DummyApiKeyService(TestApiKey));
+                    sc.AddSingleton<IApiKeyService>(new DummyApiKeyService(
+                        new OptionsWrapper<DummyApiKeyServiceConfig>(
+                            new DummyApiKeyServiceConfig{ ApiKey = TestApiKey })));
                 });
             });
         _client = _applicationFactory.CreateClient();

@@ -1,12 +1,14 @@
+using Microsoft.Extensions.Options;
+
 namespace Checkout.TakeHomeChallenge.BankSimulator.Services;
 
 internal sealed class DummyApiKeyService : IApiKeyService
 {
     private readonly string _authorizedKey;
 
-    public DummyApiKeyService(string authorizedKey = "zbky501yeyo2ezcaueaufiomnux4rqjy")
+    public DummyApiKeyService(IOptions<DummyApiKeyServiceConfig> config)
     {
-        _authorizedKey = authorizedKey;
+        _authorizedKey = config.Value.ApiKey;
     }
     
     public Task<bool> IsKeyAuthorizedAsync(string key) =>
