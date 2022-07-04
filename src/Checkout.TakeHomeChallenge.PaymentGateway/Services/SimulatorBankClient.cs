@@ -24,8 +24,6 @@ internal sealed class SimulatorBankClient : IAcquiringBankClient
         {
             Content = JsonContent.Create(request)
         };
-        // TODO: add this as default header 
-        // message.Headers.Add(Constants.ApiKeyHeader, TestApiKey);
         message.Headers.Add(Constants.IdempotencyKeyHeader, idempotencyKey);
         var response = await _httpClient.SendAsync(message);
 

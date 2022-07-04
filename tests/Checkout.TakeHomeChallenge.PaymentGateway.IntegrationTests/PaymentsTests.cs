@@ -16,7 +16,6 @@ namespace Checkout.TakeHomeChallenge.PaymentGateway.IntegrationTests;
 
 public class PaymentsTests : IAsyncLifetime
 {
-    // TODO: storage can and should be fully abstracted so that it can be mocked and tests run without postgres
     private readonly WebApplicationFactory<Program> _applicationFactory;
     private readonly HttpClient _client;
     private readonly Mock<IAcquiringBankClient> _acquiringBankMock;
