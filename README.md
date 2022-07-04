@@ -4,10 +4,16 @@ This is a primary documentation for the task, outlined in [this pdf](./Checkout.
 
 ### tldr 
 
-1. Run `docker compose up` (or `docker-compose up`) from the root of repo 
+1. Run `docker-compose up --build` from the root of repo  
 2. Open 'http://localhost:5000/swagger'
 3. Make a POST request to /payments (without changing MerchantId from default)
 4. Copy PaymentId from response and make GET request to /payments/{id}
+
+#### If there are connection errors popping up: 
+
+ - Check `docker --version` (mine is `Docker version 20.10.16, build aa7e414`)
+ - Try `docker compose build && docker compose up` vs `docker compose up --build` - sometimes they work differently
+ - If it didn't work, see [Deployment](#Deployment) section
 
 ## Intro - Assumptions and shortcuts
 
@@ -245,9 +251,9 @@ Even with the correction for limited resources, MakePayment operation is a bit i
 duration can be much higher than initial goals. The bottleneck is most likely Postgres writes, 
 but deeper investigation is needed. 
 
-### Deployment / how to run
+### Deployment
 
-The simplest way to run the entire project is with `docker compose up`. This will start:
+The simplest way to run the entire project is with `docker compose up` (add --build if it's the first time). This will start:
 1. Bank Simulator
 2. Payment Gateway
 3. Postgres
@@ -257,6 +263,8 @@ In which case, without changing default appsettings, there has to be an empty po
 on localhost:5432 with "postgres" user and password "123". This can be achieved via docker with
 
 `docker run -it --rm -e POSTGRES_PASSWORD=123 -p 5432:5432 postgres:14`
+
+This will allow to run and debug the application, but for it to fully work you also need to run BankSimulator.
 
 For the production deployment I would normally prefer Kubernetes. 
 Additional considerations that will then be required:
