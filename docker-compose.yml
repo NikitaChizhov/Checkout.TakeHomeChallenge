@@ -18,6 +18,8 @@ services:
   
   k6:
     image: grafana/k6:0.38.3
+    profiles:
+      - test
     depends_on: 
       - bank-api
       - payment-gateway
