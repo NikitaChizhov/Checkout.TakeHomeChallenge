@@ -7,6 +7,7 @@ using Checkout.TakeHomeChallenge.PaymentGateway.Services;
 using Checkout.TakeHomeChallenge.PaymentGateway.Storage;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +28,16 @@ builder.Services.AddSwaggerGen(options =>
     options.MapType<IdempotencyId>(() => new OpenApiSchema { Type = "string", Format = "uuid" });
     options.MapType<MerchantId>(() => new OpenApiSchema { Type = "string", Format = "uuid" });
     options.MapType<PaymentId>(() => new OpenApiSchema { Type = "string", Format = "uuid" });
+    options.MapType<CurrencyAmount>(() => new OpenApiSchema
+    {
+        Type = "object",
+        Required = new HashSet<string>{ "amount", "currency" },
+        Properties = new Dictionary<string, OpenApiSchema>
+        {
+            ["amount"] = new() { Type = "integer", Format = "int64", Minimum = 1},
+            ["currency"] = new() { Type = "string", Example = new OpenApiString("EUR") }
+        }
+    });
 });
 
 
@@ -73,11 +84,5 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
