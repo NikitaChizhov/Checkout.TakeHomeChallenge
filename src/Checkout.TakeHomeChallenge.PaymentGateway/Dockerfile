@@ -6,8 +6,10 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["src/Checkout.TakeHomeChallenge.PaymentGateway/Checkout.TakeHomeChallenge.PaymentGateway.csproj", "Checkout.TakeHomeChallenge.PaymentGateway/"]
-RUN dotnet restore "src/Checkout.TakeHomeChallenge.PaymentGateway/Checkout.TakeHomeChallenge.PaymentGateway.csproj"
-COPY . .
+COPY ["src/Checkout.TakeHomeChallenge.Contracts/Checkout.TakeHomeChallenge.Contracts.csproj", "Checkout.TakeHomeChallenge.Contracts/"]
+RUN dotnet restore "Checkout.TakeHomeChallenge.PaymentGateway/Checkout.TakeHomeChallenge.PaymentGateway.csproj"
+
+COPY ./src .
 WORKDIR "/src/Checkout.TakeHomeChallenge.PaymentGateway"
 RUN dotnet build "Checkout.TakeHomeChallenge.PaymentGateway.csproj" -c Release -o /app/build
 

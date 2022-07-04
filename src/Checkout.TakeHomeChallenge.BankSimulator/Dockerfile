@@ -7,8 +7,9 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["src/Checkout.TakeHomeChallenge.BankSimulator/Checkout.TakeHomeChallenge.BankSimulator.csproj", "Checkout.TakeHomeChallenge.BankSimulator/"]
 COPY ["src/Checkout.TakeHomeChallenge.Contracts/Checkout.TakeHomeChallenge.Contracts.csproj", "Checkout.TakeHomeChallenge.Contracts/"]
-RUN dotnet restore "src/Checkout.TakeHomeChallenge.BankSimulator/Checkout.TakeHomeChallenge.BankSimulator.csproj"
-COPY . .
+RUN dotnet restore "Checkout.TakeHomeChallenge.BankSimulator/Checkout.TakeHomeChallenge.BankSimulator.csproj"
+
+COPY ./src .
 WORKDIR "/src/Checkout.TakeHomeChallenge.BankSimulator"
 RUN dotnet build "Checkout.TakeHomeChallenge.BankSimulator.csproj" -c Release -o /app/build
 
