@@ -12,13 +12,13 @@ internal sealed class TestPaymentStorage
     private readonly ConcurrentDictionary<PaymentId, PaymentInitializedEvent> _initialized = new();
     private readonly ConcurrentDictionary<PaymentId, PaymentProcessedEvent> _processed = new();
 
-    public async Task<Result> SaveAsync(PaymentInitializedEvent @event)
+    public Task<Result> SaveAsync(PaymentInitializedEvent @event)
     {
         var paymentId = new PaymentId(@event.PaymentId);
         var success = _initialized.TryAdd(paymentId, @event);
-        return success
+        return Task.FromResult(success
             ? Result.Successful()
-            : Result.Fail("Payment id already exists", FailureCode.PaymentAlreadyStartedBefore);
+            : Result.Fail("Payment id already exists", FailureCode.PaymentAlreadyStartedBefore));
     }
 
     public Task SaveAsync(PaymentProcessedEvent @event)
@@ -28,12 +28,12 @@ internal sealed class TestPaymentStorage
         return Task.CompletedTask;
     }
 
-    public async Task<PaymentProcessedEvent?> GetAsync(PaymentId paymentId, CancellationToken cancellationToken = default)
+    public Task<PaymentProcessedEvent?> GetAsync(PaymentId paymentId, CancellationToken cancellationToken = default)
     {
-        if (!_processed.TryGetValue(paymentId, out var @event)) return null;
+        if (!_processed.TryGetValue(paymentId, out var @event)) return Task.FromResult<PaymentProcessedEvent?>(null);
 
         if (_initialized.TryGetValue(paymentId, out var initialized)) @event.Info = initialized;
 
-        return @event;
+        return Task.FromResult(@event)!;
     }
 }

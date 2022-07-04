@@ -48,7 +48,7 @@ public sealed class Result<T> : Result
         Value = value;
     }
 
-    public static Result<T> Fail(string reason, FailureCode code = FailureCode.Default) 
+    public new static Result<T> Fail(string reason, FailureCode code = FailureCode.Default) 
         => new(default, false, reason, code);
 
     /// <summary>

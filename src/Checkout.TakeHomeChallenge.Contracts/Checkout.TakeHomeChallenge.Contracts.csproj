@@ -9,6 +9,7 @@
     <PropertyGroup>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <DocumentationFile>Checkout.TakeHomeChallenge.Contracts.xml</DocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
     </PropertyGroup>
     
 <!--     <PropertyGroup> -->

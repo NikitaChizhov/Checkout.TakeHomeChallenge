@@ -15,7 +15,7 @@ internal sealed class PaymentInitializedEvent
     
     public Guid MerchantId { get; set; }
 
-    public string PaymentReference { get; set; }
+    public string PaymentReference { get; set; } = "";
     
     public string SenderCardLastFourDigits { get; set; } = "";
     
