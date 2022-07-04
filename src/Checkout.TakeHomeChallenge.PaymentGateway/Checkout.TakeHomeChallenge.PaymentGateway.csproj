@@ -7,10 +7,15 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <DocumentationFile>Checkout.TakeHomeChallenge.PaymentGateway.xml</DocumentationFile>
+    </PropertyGroup>
+    
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="11.0.1" />
         <PackageReference Include="Be.Vlaanderen.Basisregisters.Generators.Guid.Deterministic" Version="3.0.1" />
         <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.4.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.5" />
         <PackageReference Include="StronglyTypedId" Version="1.0.0-beta06" />

@@ -6,6 +6,11 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
     
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <DocumentationFile>Checkout.TakeHomeChallenge.Contracts.xml</DocumentationFile>
+    </PropertyGroup>
+    
 <!--     <PropertyGroup> -->
 <!--         <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles> -->
 <!--         <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath> -->

@@ -15,12 +15,14 @@ public sealed record PaymentRequest
     /// <summary>
     /// Id of the merchant.
     /// </summary>
+    /// <example>3fa85f64-5717-4562-b3fc-2c963f66afa6</example>
     [Required]
     public MerchantId MerchantId { get; init; }
     
     /// <summary>
     /// Credit card number.
     /// </summary>
+    /// <example>4974 5980 7129 2095</example>
     [Required]
     [CreditCard]
     public string CardNumber { get; init; } = "";
@@ -28,12 +30,14 @@ public sealed record PaymentRequest
     /// <summary>
     /// Name written on the card.
     /// </summary>
+    /// <example>Marie Curie</example>
     [Required]
     public string Name { get; init; } = "";
 
     /// <summary>
     /// Cards expiry date in the mm/yyyy pattern.
     /// </summary>
+    /// <example>04/2028</example>
     [Required]
     [RegularExpression(Constants.ExpiryDatePattern)]
     public string CardExpiryDate { get; init; } = "";
@@ -41,6 +45,7 @@ public sealed record PaymentRequest
     /// <summary>
     /// Cards CVV. 
     /// </summary>
+    /// <example>123</example>
     [Required]
     [RegularExpression(Constants.CardVerificationNumberPattern)]
     public string CardVerificationValue { get; init; } = "";
