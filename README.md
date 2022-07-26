@@ -20,9 +20,7 @@ This is a primary documentation for the task, outlined in [this pdf](./Checkout.
 ### Git
 
 1. As it is rather ubiquitous in software development, deliverable for the task was decided to be 
-sent via a link to a private git repository. There are no limitations placed by the author on usage 
-of the link or code in this repository, Checkout Ltd may use the link or the code in this repository 
-in any way according to [MIT licence](./LICENCE.md)
+sent via a link to a private git repository. The repository was made public after obtaining explicit permission from Checkout Ltd, code from it may be used in any way according to [MIT licence](./LICENCE.md)
 
 2. I tried to follow realistic practices when it comes to commits content and messages, but skipped 
 everything related to branch management. In a real project, I would likely use either 
